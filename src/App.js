@@ -14,7 +14,7 @@ function App() {
 function CounterBox() {
 
   const [counter, setCounter] = useState(0); // Esto se crea con un array, no con un objeto.
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('black');
 
   /*function changeCounter(value) {
     console.log("Cambiamos el contador: ", value);
@@ -33,11 +33,18 @@ function CounterBox() {
     
   }*/
 
-  function changeCounter(value){
-    setCounter(()=>{
-      const newColor = counter + + value > 0? 'green':'red';
-      setColor(newColor);
-      return counter + + value;
+  function changeCounter(value) {
+    setCounter(() => {      
+      let newColor = "";
+      let newCounter = (counter + + value)      
+
+      if ( newCounter == 0) {        
+        newColor = 'black'
+      } else {
+        newColor = newCounter > 0 ? 'green' : 'red';
+        setColor(newColor);
+      }
+      return newCounter;
     })
   }
 
@@ -46,7 +53,7 @@ function CounterBox() {
       <h1>Contador</h1>
 
       <div className='CounterValue'>
-        <span style={{'color': color}}>{counter}</span>
+        <span style={{ 'color': color }}>{counter}</span>
       </div>
 
       <div className="BtnContainer">
